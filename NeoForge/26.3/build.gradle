@@ -1,0 +1,12 @@
+plugins { id "java-library"; id "net.neoforged.moddev" version "2.0.147" }
+version=project.mod_version
+group="net.norevy"
+base { archivesName="OptiLeaves-neoforge-26.3" }
+java { toolchain { languageVersion=JavaLanguageVersion.of(25) }; withSourcesJar() }
+neoForge {
+ enable { version=project.neo_version; disableRecompilation=true }
+ runs { client { client() } }
+ mods { optileaves { sourceSet sourceSets.main } }
+}
+tasks.withType(JavaCompile).configureEach { options.encoding="UTF-8"; options.release=25 }
+jar { from("../../LICENSE") { rename { "LICENSE_OptiLeaves" } } }

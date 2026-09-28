@@ -1,0 +1,22 @@
+plugins {
+ id "net.fabricmc.fabric-loom" version "1.18.2"
+}
+version = project.mod_version
+group = project.maven_group
+base { archivesName = project.archives_base_name }
+repositories { mavenCentral(); maven { url = "https://maven.terraformersmc.com/releases" } }
+loom {
+ mods { optileaves { sourceSet sourceSets.main } }
+}
+dependencies {
+ minecraft "com.mojang:minecraft:" + project.minecraft_version
+ implementation "net.fabricmc:fabric-loader:" + project.loader_version
+ compileOnly "com.terraformersmc:modmenu:" + project.modmenu_version
+}
+processResources {
+ inputs.property "version", project.version
+ filesMatching("fabric.mod.json") { expand "version": project.version }
+}
+tasks.withType(JavaCompile).configureEach { options.encoding="UTF-8"; options.release=25 }
+java { toolchain { languageVersion=JavaLanguageVersion.of(25) }; withSourcesJar() }
+jar { from("../../LICENSE") { rename { "LICENSE_OptiLeaves" } } }

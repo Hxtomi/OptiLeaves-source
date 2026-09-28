@@ -1,0 +1,13 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "net.norevy.optileaves.mixin.sodium",
+  "plugin": "net.norevy.optileaves.mixin.sodium.OptionalRendererPlugin",
+  "compatibilityLevel": "JAVA_21",
+  "client": [
+    "SodiumOcclusionMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

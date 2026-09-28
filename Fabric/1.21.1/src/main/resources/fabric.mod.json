@@ -3,7 +3,7 @@
   "id": "optileaves",
   "version": "${version}",
   "name": "OptiLeaves",
-  "description": "a Minecraft mod that optimizes leaves render for a better performance.",
+  "description": "Rendering optimization mod for MC with configurable leaf culling.",
   "authors": [
     "norevy"
   ],

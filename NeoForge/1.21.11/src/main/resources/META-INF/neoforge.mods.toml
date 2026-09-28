@@ -1,0 +1,27 @@
+modLoader="javafml"
+loaderVersion="[4,)"
+license="All Rights Reserved"
+[[mods]]
+modId="optileaves"
+version="2.0"
+displayName="OptiLeaves"
+authors="norevy"
+description='''
+OptiLeaves - mod for leaves rendering optimization.
+'''
+[[mixins]]
+config="optileaves.mixins.json"
+[[mixins]]
+config="optileaves.sodium.mixins.json"
+[[dependencies.optileaves]]
+modId="neoforge"
+type="required"
+versionRange="[21.11.45,21.12)"
+ordering="NONE"
+side="CLIENT"
+[[dependencies.optileaves]]
+modId="minecraft"
+type="required"
+versionRange="[1.21.11]"
+ordering="NONE"
+side="CLIENT"

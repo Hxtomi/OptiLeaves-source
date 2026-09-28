@@ -8,6 +8,12 @@ Each port is a separate Gradle project. The wrapper downloads the required Gradl
 | `NeoForge/1.21.1` | 21 | 8.14.3 |
 | `Fabric/1.20.1` | 21 | 8.12 |
 | `Fabric/1.21.1` | 21 | 8.12 |
+| `Fabric/1.21.11` | 21 | 9.8.0 |
+| `Fabric/26.2` | 25 | 9.8.0 |
+| `Fabric/26.3` | 25 | 9.8.0 |
+| `NeoForge/1.21.11` | 21 | 9.8.0 |
+| `NeoForge/26.2` | 25 | 9.8.0 |
+| `NeoForge/26.3` | 25 | 9.8.0 |
 
 Install the listed JDK, set `JAVA_HOME`, and run from the port's directory:
 
