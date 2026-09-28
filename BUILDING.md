@@ -23,6 +23,6 @@ On Windows:
 
 The mod jar is written to `build/libs/`. Fabric 1.20.1 uses JDK 21 for its build tools and targets Java 17 at runtime. Do not install jars ending in `-sources.jar` or `-dev.jar`.
 
-An internet connection is required to download Minecraft, mappings and build dependencies. CI builds all four ports; it does not run Minecraft or measure performance.
+An internet connection is required to download MC, mappings and build dependencies. CI checks compilation and packaging; it does not launch the game or measure performance.
 
 The source code is subject to [LICENSE](LICENSE).

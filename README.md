@@ -5,9 +5,9 @@
 
 Created on CurseForge on **February 2, 2025**. Public source code starts with **v2.0**; source code and release files from earlier versions are not included here. Download counts cover the whole project, including earlier releases. The Modrinth counter combines both project listings and updates daily.
 
-OptiLeaves improves Minecraft performance in areas with dense foliage by reducing how much leaf geometry needs to be rendered. Adjustable culling depth lets you balance performance and foliage detail.
+OptiLeaves is a rendering optimization mod for MC. It reduces leaf geometry in dense foliage, with adjustable culling depth to balance performance and visual detail.
 
-| Minecraft | Source code |
+| MC version | Source code |
 | --- | --- |
 | 1.20.1 | [Forge](Forge/1.20.1) · [Fabric](Fabric/1.20.1) |
 | 1.21.1 | [NeoForge](NeoForge/1.21.1) · [Fabric](Fabric/1.21.1) |
