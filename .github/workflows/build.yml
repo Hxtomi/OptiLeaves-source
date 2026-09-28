@@ -1,0 +1,38 @@
+name: Build
+
+on:
+  push:
+    paths-ignore:
+      - '**/*.md'
+      - '.github/badges/**'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - port: Forge/1.20.1
+            java: '17'
+          - port: NeoForge/1.21.1
+            java: '21'
+          - port: Fabric/1.20.1
+            java: '21'
+          - port: Fabric/1.21.1
+            java: '21'
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@cf277c60eb25467037889841efdb72551f06f6c3 # v4
+        with:
+          distribution: temurin
+          java-version: ${{ matrix.java }}
+      - name: Build
+        working-directory: ${{ matrix.port }}
+        run: ./gradlew build --no-daemon
