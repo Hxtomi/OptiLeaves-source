@@ -1,0 +1,14 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "net.norevy.optileaves.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "refmap": "optileaves.refmap.json",
+  "client": [
+    "block.BlockFaceCullMixin",
+    "block.LeafRebuildMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

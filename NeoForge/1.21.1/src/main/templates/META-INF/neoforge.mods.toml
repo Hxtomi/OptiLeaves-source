@@ -1,0 +1,31 @@
+modLoader = "javafml"
+loaderVersion = "${loader_version_range}"
+license = "${mod_license}"
+
+[[mods]]
+modId = "optileaves"
+version = "${mod_version}"
+displayName = "${mod_name}"
+description = '''
+${mod_description}
+'''
+
+[[dependencies.optileaves]]
+modId = "neoforge"
+type = "required"
+versionRange = "${neoforge_version_range}"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.optileaves]]
+modId = "minecraft"
+type = "required"
+versionRange = "${minecraft_version_range}"
+ordering = "NONE"
+side = "BOTH"
+
+[[mixins]]
+config = "optileaves.mixins.json"
+
+[[mixins]]
+config = "optileaves.embeddium.mixins.json"

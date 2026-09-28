@@ -1,0 +1,18 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "net.norevy.optileaves.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "refmap": "optileaves.refmap.json",
+  "plugin": "net.norevy.optileaves.mixin.OptionalRendererPlugin",
+  "client": [
+    "BlockMixin",
+    "LeafRebuildMixin",
+    "SodiumModernMixin",
+    "SodiumLegacyMixin",
+    "SodiumOptionsMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

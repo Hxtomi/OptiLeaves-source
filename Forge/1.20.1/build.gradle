@@ -1,0 +1,41 @@
+plugins {
+    id 'net.minecraftforge.gradle' version '6.0.54'
+    id 'org.spongepowered.mixin' version '0.7.38'
+    id 'java-library'
+}
+group = 'net.norevy.optileaves'
+version = '2.0'
+base { archivesName = 'OptiLeaves-forge-1.20.1' }
+java { toolchain.languageVersion = JavaLanguageVersion.of(17) }
+minecraft {
+    mappings channel: 'official', version: '1.20.1'
+    runs {
+        client {
+            workingDirectory project.file('run')
+            property 'forge.logging.console.level', 'info'
+            mods { optileaves { source sourceSets.main } }
+        }
+    }
+}
+repositories {
+    mavenCentral()
+    maven { url = 'https://cursemaven.com'; content { includeGroup 'curse.maven' } }
+    maven { url = 'https://repo.spongepowered.org/repository/maven-public/' }
+}
+dependencies {
+    minecraft 'net.minecraftforge:forge:1.20.1-47.4.10'
+    compileOnly fg.deobf('curse.maven:embeddium-908741:5681725')
+    annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
+}
+mixin { add sourceSets.main, 'optileaves.refmap.json'; config 'optileaves.mixins.json' }
+tasks.withType(JavaCompile).configureEach { options.encoding = 'UTF-8' }
+tasks.named('processResources', ProcessResources).configure {
+    inputs.property 'version', project.version
+    filesMatching('META-INF/mods.toml') { expand version: project.version }
+}
+jar {
+    manifest.attributes('MixinConfigs': 'optileaves.mixins.json', 'Implementation-Version': project.version)
+    finalizedBy 'reobfJar'
+}
+
+jar { from("../../LICENSE") { rename { "LICENSE_OptiLeaves" } } }

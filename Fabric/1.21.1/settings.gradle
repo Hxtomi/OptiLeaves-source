@@ -1,0 +1,9 @@
+pluginManagement {
+    repositories {
+        maven { url = "https://maven.fabricmc.net/" }
+        mavenCentral()
+        gradlePluginPortal()
+    }
+    plugins { id "fabric-loom" version "1.10.5" }
+}
+rootProject.name = "optileaves_fabric1.21.1"

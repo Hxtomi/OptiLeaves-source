@@ -1,0 +1,13 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "net.norevy.optileaves.mixins.embeddium",
+  "plugin": "net.norevy.optileaves.mixins.embeddium.EmbeddiumMixinPlugin",
+  "compatibilityLevel": "JAVA_21",
+  "client": [
+    "BlockOcclusionCacheMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

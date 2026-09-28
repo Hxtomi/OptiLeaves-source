@@ -1,0 +1,49 @@
+package net.norevy.optileaves.mixin;
+
+import net.minecraft.client.renderer.LevelRenderer;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.block.LeavesBlock;
+import net.minecraft.world.level.block.state.BlockState;
+import net.norevy.optileaves.Config;
+import net.norevy.optileaves.RendererCompat;
+import org.spongepowered.asm.mixin.*;
+import org.spongepowered.asm.mixin.injection.*;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+
+@Mixin(LevelRenderer.class)
+public abstract class LeafRebuildMixin {
+    @Unique private static final Direction[] OPTILEAVES_DIRECTIONS = Direction.values();
+    @Shadow public abstract void setSectionDirty(int x, int y, int z);
+
+    @Inject(method = "blockChanged", at = @At("HEAD"))
+    private void optileaves$blockChanged(BlockGetter view, BlockPos pos, BlockState oldState,
+                                        BlockState newState, int flags, CallbackInfo ci) {
+        optileaves$markDistantFaces(pos, oldState, newState);
+    }
+
+    @Inject(method = "setBlockDirty(Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/world/level/block/state/BlockState;)V", at = @At("HEAD"))
+    private void optileaves$blockDirty(BlockPos pos, BlockState oldState, BlockState newState, CallbackInfo ci) {
+        optileaves$markDistantFaces(pos, oldState, newState);
+    }
+
+    @Unique
+    private void optileaves$markDistantFaces(BlockPos pos, BlockState oldState, BlockState newState) {
+        if (!Config.INSTANCE.enabled || Config.INSTANCE.depth <= 1) return;
+        if ((oldState.getBlock() instanceof LeavesBlock) == (newState.getBlock() instanceof LeavesBlock)) return;
+        if (!RendererCompat.fancyLeaves()) return;
+        int depth = Config.clampDepth(Config.INSTANCE.depth);
+        for (Direction face : OPTILEAVES_DIRECTIONS) {
+            int x = (pos.getX() + face.getStepX() * depth) >> 4;
+            int y = (pos.getY() + face.getStepY() * depth) >> 4;
+            int z = (pos.getZ() + face.getStepZ() * depth) >> 4;
+            // Vanilla already rebuilds the one-block neighborhood. Add only sections beyond it.
+            if (x != (pos.getX() + face.getStepX()) >> 4 ||
+                y != (pos.getY() + face.getStepY()) >> 4 ||
+                z != (pos.getZ() + face.getStepZ()) >> 4) {
+                setSectionDirty(x, y, z);
+            }
+        }
+    }
+}

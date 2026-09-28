@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "id": "optileaves",
+  "version": "${version}",
+  "name": "OptiLeaves",
+  "description": "a Minecraft mod that optimizes leaves render for a better performance.",
+  "authors": [
+    "norevy"
+  ],
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "net.norevy.optileaves.OptiLeavesClient"
+    ],
+    "modmenu": [
+      "net.norevy.optileaves.ui.MenuHook"
+    ]
+  },
+  "mixins": [
+    "optileaves.mixins.json",
+    "optileaves.sodium.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.16.9",
+    "minecraft": "1.20.1",
+    "java": ">=17"
+  },
+  "suggests": {
+    "modmenu": "*",
+    "sodium": "*"
+  },
+  "license": "All Rights Reserved"
+}
