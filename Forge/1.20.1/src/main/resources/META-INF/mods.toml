@@ -1,6 +1,6 @@
 modLoader = "javafml"
 loaderVersion = "[47,48)"
-license = "All Rights Reserved"
+license = "PolyForm-Shield-1.0.0"
 [[mods]]
 modId = "optileaves"
 version = "${version}"

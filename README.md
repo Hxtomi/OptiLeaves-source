@@ -17,4 +17,6 @@ OptiLeaves is a rendering optimization mod for MC. It reduces leaf geometry in d
 
 Get released builds on [CurseForge](https://www.curseforge.com/minecraft/mc-mods/optileaves) or [Modrinth](https://modrinth.com/user/norevy/mods). See [BUILDING.md](BUILDING.md) for build instructions.
 
-Source available for inspection and code review. **All Rights Reserved.** Reuse, modification and redistribution require permission; see [LICENSE](LICENSE).
+[![Modpack Friendly](https://img.shields.io/badge/Modpack-Friendly-8FAF9A)](LICENSE)
+
+Licensed under [PolyForm Shield 1.0.0](LICENSE). Modpack inclusion is welcome. Use, modification and redistribution are allowed under the license's noncompetition terms.
