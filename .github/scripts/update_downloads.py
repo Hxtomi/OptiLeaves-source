@@ -1,5 +1,6 @@
 import json
 from pathlib import Path
+import xml.etree.ElementTree as ET
 from urllib.request import Request, urlopen
 
 PROJECT_IDS = ("ChDudAun", "5tucHyQx")
@@ -20,19 +21,37 @@ def main():
             raise ValueError("Unexpected Modrinth project response")
         total += count
 
-    label = f"{total:,}"
-    width = max(78, len(label) * 8 + 20)
-    svg = (
-        f'<svg xmlns="http://www.w3.org/2000/svg" width="{88 + width}" height="20" '
-        f'role="img" aria-label="Modrinth: {label} downloads">\n'
-        f'  <title>Modrinth: {label} downloads, both projects combined</title>\n'
-        f'  <clipPath id="r"><rect width="{88 + width}" height="20" rx="3"/></clipPath>\n'
-        f'  <g clip-path="url(#r)"><rect width="88" height="20" fill="#555"/>'
-        f'<rect x="88" width="{width}" height="20" fill="#177c47"/></g>\n'
-        f'  <g fill="#fff" text-anchor="middle" font-family="Verdana,DejaVu Sans,sans-serif" font-size="11">\n'
-        f'    <text x="44" y="14">Modrinth</text><text x="{88 + width / 2:g}" y="14">{label}</text>\n'
-        f'  </g>\n</svg>\n'
+    label = str(total)
+    for divisor, suffix in ((1_000_000_000, "B"), (1_000_000, "M"), (1_000, "k")):
+        if total >= divisor:
+            value = total / divisor
+            label = f"{value:.1f}".rstrip("0").rstrip(".") if value < 10 else f"{value:.0f}"
+            label += suffix
+            break
+
+    request = Request(
+        f"https://img.shields.io/badge/Modrinth-{label}-177c47?style=flat",
+        headers={"User-Agent": "Hxtomi/OptiLeaves-source (GitHub download badge)"},
     )
+    with urlopen(request, timeout=30) as response:
+        svg = response.read().decode("utf-8")
+
+    namespace = "http://www.w3.org/2000/svg"
+    badge = ET.fromstring(svg)
+    title = badge.find(f"{{{namespace}}}title")
+    if (
+        badge.tag != f"{{{namespace}}}svg"
+        or badge.get("height") != "20"
+        or badge.get("aria-label") != f"Modrinth: {label}"
+        or title is None
+    ):
+        raise ValueError("Unexpected Shields badge response")
+
+    # Use Shields' sizing and style, keeping the exact combined total accessible.
+    badge.set("aria-label", f"Modrinth: {total:,} downloads")
+    title.text = f"Modrinth: {total:,} downloads, both projects combined"
+    ET.register_namespace("", namespace)
+    svg = ET.tostring(badge, encoding="unicode") + "\n"
     BADGE.parent.mkdir(parents=True, exist_ok=True)
     BADGE.write_text(svg, encoding="utf-8")
     print(f"Modrinth combined downloads: {total}")
