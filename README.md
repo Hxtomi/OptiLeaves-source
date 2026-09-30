@@ -2,8 +2,9 @@
 
 [![CurseForge downloads](https://img.shields.io/curseforge/dt/1191403?label=CurseForge&color=F16436)](https://www.curseforge.com/minecraft/mc-mods/optileaves)
 [![Modrinth downloads](.github/badges/modrinth.svg)](https://modrinth.com/user/norevy/mods)
+[![Created on CurseForge](https://img.shields.io/badge/Created-Feb_2%2C_2025-54748D)](https://www.curseforge.com/minecraft/mc-mods/optileaves)
 
-Created on CurseForge on **February 2, 2025**. Public source code starts with **v2.0**; source code and release files from earlier versions are not included here. Download counts cover the whole project, including earlier releases. The Modrinth counter combines both project listings and updates daily.
+Public source code starts with **v2.0**; source code and release files from earlier versions are not included here. Download counts cover the whole project, including earlier releases. The Modrinth counter combines both project listings and updates daily.
 
 OptiLeaves is a rendering optimization mod for MC. It reduces leaf geometry in dense foliage, with adjustable culling depth to balance performance and visual detail.
 
